@@ -1,0 +1,37 @@
+name: "GitHub SMS"
+description: "Send SMS to your mobile when a push occurs in the master branch"
+author: "athul"
+inputs:
+  from_num:
+    description: "The twilio number from which the SMS should be sent"
+    required: true
+  to_num:
+    description: "The number which should receive the SMS"
+    required: true
+  twilio_account_sid:
+    description: "Twilio Account SID from twilio console"
+    required: true
+  twilio_auth_token:
+    description: "Twilio Authentication token from console"
+    required: true
+  iutitle: 
+    description: 'Issue Title'
+    default: ${{ github.event.issue.title }}
+  iunum:
+    description: 'Issue Number'
+    default: ${{ github.event.issue.number }}
+  event_action:
+    description: "Event Action of the Issue or Pull Request if it's closed or opened etc..."
+    default: ${{ github.event.action }}
+  prnum:
+    description: 'PR Number'
+    default: ${{ github.event.pull_request.number }}
+  prtitle:
+    description: 'Title of the PR'
+    default: ${{ github.event.pull_request.title }}
+runs:
+  using: "docker"
+  image: "Dockerfile"
+branding:
+  icon: message-square
+  color: yellow
